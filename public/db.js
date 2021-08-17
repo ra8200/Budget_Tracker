@@ -4,9 +4,9 @@ const request = indexedDB.open("budget", 2);
 request.onupgradeneeded = function (event) {
   db = event.target.result;
   db.createObjectStore("pending");
-  if (navigator.onLine) {
-    checkDatabase();
-  }
+  // if (navigator.onLine) {
+  //   checkDatabase();
+  // }
 };
 
 request.onsuccess = function (event) {
@@ -47,5 +47,6 @@ function checkDatabase() {
     }
   };
 }
-
+console.log("before add listener");
 window.addEventListener("online", checkDatabase);
+console.log("after add listner.");
