@@ -45,13 +45,13 @@
   <script src="/db.js"></script>
 
   <script src="text/javascript">
-    (function () {
-      if ("serviceWorker" in navigator) {
-        navigator.serviceWorker.register("/public/service-worker.js", { scope: "/" })
-          .then(() => console.log("Service Worker found and registered successfully."))
-          .catch(error => console.log("Service Worker not found and not registered.", error));
-        }
-    })();
+  console.log("inside script tag")
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker.register("/public/service-worker.js", { scope: "/" })
+        .then(() => console.log("Service Worker found and registered successfully."))
+        .catch(error => console.log("Service Worker not found and not registered.", error));
+      }; 
+      console.log("end of script tag");
   </script>
 
 

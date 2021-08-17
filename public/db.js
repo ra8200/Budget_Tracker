@@ -1,11 +1,16 @@
-const db;
-const request = indexedDB.open("budget", 1);
+let db;
+const request = indexedDB.open("budget", 2);
 
 request.onupgradeneeded = function (event) {
-  const db = event.target.result;
+  db = event.target.result;
+  db.createObjectStore("pending");
   if (navigator.onLine) {
     checkDatabase();
   }
+};
+
+request.onsuccess = function (event) {
+  db = event.target.result;
 };
 
 request.onerror = function (event) {
