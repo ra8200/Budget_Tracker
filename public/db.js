@@ -1,9 +1,10 @@
 let db;
-const request = indexedDB.open("budget", 2);
+const request = indexedDB.open("budget", 3);
 
 request.onupgradeneeded = function (event) {
   db = event.target.result;
-  db.createObjectStore("pending");
+  db.deleteObjectStore("pending");
+  db.createObjectStore("pending", { autoIncrement: true });
   // if (navigator.onLine) {
   //   checkDatabase();
   // }
@@ -14,7 +15,7 @@ request.onsuccess = function (event) {
 };
 
 request.onerror = function (event) {
-  console.log("Oh no" + event.target.errorCode);
+  console.log("Oh no " + event.target.errorCode);
 };
 
 function saveRecord(record) {
