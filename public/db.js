@@ -1,5 +1,4 @@
 let db;
-// Creates a new db for the budget tracking database
 const request = indexedDB.open("budget", 1);
 
 request.onupgradeneeded = function (event) {
@@ -24,7 +23,7 @@ function checkDatabase() {
   const store = transaction.objectStore("pending");
   const getAll = store.getAll();
 
-  getAll.onsucess = function () {
+  getAll.onsuccess = function () {
     if (getAll.result.length > 0) {
       fetch("/api/transaction/bulk", {
         method: "POST",

@@ -5,22 +5,23 @@ const FILES_TO_CACHE = [
   "/styles.ccs",
   "/public/icons/icon-192x192.png",
   "/public/icons/icon-512x512.png",
+  "/manifest.webmanifest",
+  "/db.js",
 ];
 
 const CACHE_NAME = "static-cache-v2";
 const DATA_CACHE_NAME = "data-cache-v1";
 
-//installs cached function
 self.addEventListener("install", function (evt) {
   evt.waitUntil(
-    cashes.open(CACHE_NAME).then((cache) => {
-      console.log("Your files were pre-cached.");
+    caches.open(CACHE_NAME).then((cache) => {
+      console.log("Your files have been pre-cached.");
+      return cache.addAll(FILES_TO_CACHE);
     })
   );
   self.skipWaiting();
 });
 
-//activates caching
 self.addEventListener("activate", function (evt) {
   evt.waitUntil(
     caches.keys().then((keyList) => {
@@ -37,7 +38,6 @@ self.addEventListener("activate", function (evt) {
   self.clients.claim();
 });
 
-// fetching cached data
 self.addEventListener("fetch", function (evt) {
   if (evt.request.url.includes("/api/")) {
     evt.respondWith(
