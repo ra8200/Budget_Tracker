@@ -3,11 +3,8 @@ const request = indexedDB.open("budget", 3);
 
 request.onupgradeneeded = function (event) {
   db = event.target.result;
-  db.deleteObjectStore("pending");
+  // db.deleteObjectStore("pending");
   db.createObjectStore("pending", { autoIncrement: true });
-  // if (navigator.onLine) {
-  //   checkDatabase();
-  // }
 };
 
 request.onsuccess = function (event) {
@@ -48,6 +45,4 @@ function checkDatabase() {
     }
   };
 }
-console.log("before add listener");
 window.addEventListener("online", checkDatabase);
-console.log("after add listner.");
