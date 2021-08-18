@@ -46,7 +46,7 @@ self.addEventListener("fetch", (event) => {
   if (event.request.url.startsWith(self.location.origin)) {
     event.respondWith(
       caches.match(event.request).then((cachedResponse) => {
-        if (cashedResponse) {
+        if (cachedResponse) {
           return cachedResponse;
         }
 
